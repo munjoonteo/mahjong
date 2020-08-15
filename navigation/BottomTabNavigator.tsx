@@ -1,13 +1,16 @@
-import { Ionicons } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
-import * as React from 'react';
+import { Ionicons } from "@expo/vector-icons";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
+import * as React from "react";
+import { View } from "react-native";
 
-import Colors from '../constants/Colors';
-import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import Colors from "../constants/Colors";
+import useColorScheme from "../hooks/useColorScheme";
+import Home from "../screens/Home";
+import Points from "../screens/PointsTable";
+import AddScore from "../screens/AddScore";
+import Options from "../screens/Options";
+import { BottomTabParamList, MainParamList, OptionsParamList } from "../types";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -16,20 +19,25 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
-      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+      initialRouteName="Home"
+      tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
+    >
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneNavigator}
+        name="Home"
+        component={MainNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="md-home" color={color} />
+          ),
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoNavigator}
+        name="Options"
+        component={OptionsNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="md-settings" color={color} />
+          ),
         }}
       />
     </BottomTab.Navigator>
@@ -44,30 +52,40 @@ function TabBarIcon(props: { name: string; color: string }) {
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const TabOneStack = createStackNavigator<TabOneParamList>();
+const MainStack = createStackNavigator<MainParamList>();
 
-function TabOneNavigator() {
+function BlankHeader() {
+  return <View></View>;
+}
+
+function MainNavigator() {
   return (
-    <TabOneStack.Navigator>
-      <TabOneStack.Screen
-        name="TabOneScreen"
-        component={TabOneScreen}
-        options={{ headerTitle: 'Tab One Title' }}
+    <MainStack.Navigator>
+      <MainStack.Screen
+        name="HomeScreen"
+        component={Home}
+        options={{ headerTitle: "HK Mahjong Points Counter" }}
       />
-    </TabOneStack.Navigator>
+      <MainStack.Screen
+        name="PointsTableScreen"
+        component={Points}
+        options={{ headerTitle: (props) => <BlankHeader /> }}
+      />
+      <MainStack.Screen name="AddScoreScreen" component={AddScore} />
+    </MainStack.Navigator>
   );
 }
 
-const TabTwoStack = createStackNavigator<TabTwoParamList>();
+const OptionsStack = createStackNavigator<OptionsParamList>();
 
-function TabTwoNavigator() {
+function OptionsNavigator() {
   return (
-    <TabTwoStack.Navigator>
-      <TabTwoStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
+    <OptionsStack.Navigator>
+      <OptionsStack.Screen
+        name="OptionsScreen"
+        component={Options}
+        options={{ headerTitle: "Options" }}
       />
-    </TabTwoStack.Navigator>
+    </OptionsStack.Navigator>
   );
 }
