@@ -10,6 +10,7 @@ import Home from "../screens/Home";
 import Points from "../screens/PointsTable";
 import AddScore from "../screens/AddScore";
 import Options from "../screens/Options";
+import Setup from "../screens/Setup";
 import { BottomTabParamList, MainParamList, OptionsParamList } from "../types";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
@@ -67,9 +68,14 @@ function MainNavigator() {
         options={{ headerTitle: "HK Mahjong Points Counter" }}
       />
       <MainStack.Screen
+        name="Setup"
+        component={Setup}
+        options={{ headerTitle: () => <BlankHeader /> }}
+      />
+      <MainStack.Screen
         name="PointsTableScreen"
         component={Points}
-        options={{ headerTitle: (props) => <BlankHeader /> }}
+        options={{ headerTitle: () => <BlankHeader /> }}
       />
       <MainStack.Screen name="AddScoreScreen" component={AddScore} />
     </MainStack.Navigator>

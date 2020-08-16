@@ -10,6 +10,7 @@ export type BottomTabParamList = {
 
 export type MainParamList = {
   HomeScreen: undefined;
+  Setup: undefined;
   PointsTableScreen: undefined;
   AddScoreScreen: undefined;
 };

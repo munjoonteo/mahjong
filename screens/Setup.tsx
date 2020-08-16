@@ -3,21 +3,14 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 
 import { Text, View } from "../components/Themed";
 
-function newGame(navigation: any) {
-  // Clear local state
-  navigation.navigate("Setup");
-}
-
 export default function HomeScreen({ navigation }: any) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => newGame(navigation)}>
-        <Text>New Game</Text>
-      </TouchableOpacity>
+      <Text>Setup</Text>
       <TouchableOpacity
         onPress={() => navigation.navigate("PointsTableScreen")}
       >
-        <Text>Continue Game</Text>
+        <Text>Play!</Text>
       </TouchableOpacity>
     </View>
   );
