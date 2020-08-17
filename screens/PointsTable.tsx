@@ -9,21 +9,21 @@ import {
 
 import { Text, View } from "../components/Themed";
 
-function Item({ score }: any) {
+function Item({ result }: any) {
   return (
     <View style={styles.list}>
-      <Text>{score.round}</Text>
-      <Text>{score.east}</Text>
-      <Text>{score.south}</Text>
-      <Text>{score.west}</Text>
-      <Text>{score.north}</Text>
+      <Text>{result.round}</Text>
+      <Text>{result.score[0]}</Text>
+      <Text>{result.score[1]}</Text>
+      <Text>{result.score[2]}</Text>
+      <Text>{result.score[3]}</Text>
     </View>
   );
 }
 
 export default function PointsTable({ navigation }: any) {
   const [savedNames, setSavedNames] = React.useState([]);
-  const [results, setResults] = React.useState([]);
+  const [savedScores, setSavedScores] = React.useState([]);
 
   React.useEffect(() => {
     AsyncStorage.getItem("savedNames").then((data) => {
@@ -34,36 +34,34 @@ export default function PointsTable({ navigation }: any) {
   }, savedNames);
 
   React.useEffect(() => {
-    AsyncStorage.getItem("results").then((data) => {
+    AsyncStorage.getItem("savedScores").then((data) => {
       if (data !== null) {
-        setResults(JSON.parse(data));
+        setSavedScores(JSON.parse(data));
       }
     });
-  }, results);
+  }, savedScores);
 
   let dummy = [
     {
       round: "1",
-      east: 1,
-      south: -1,
-      west: 0,
-      north: 0,
+      score: [1, -1, 0, 0],
     },
     {
-      round: "1",
-      east: 1,
-      south: -1,
-      west: 0,
-      north: 0,
+      round: "2",
+      score: [1, -1, 0, 0],
+    },
+    {
+      round: "3",
+      score: [1, -1, 0, 0],
     },
   ];
 
   let totalScore = [0, 0, 0, 0];
   for (let result of dummy) {
-    totalScore[0] += result.east;
-    totalScore[1] += result.south;
-    totalScore[2] += result.west;
-    totalScore[3] += result.north;
+    totalScore[0] += result.score[0];
+    totalScore[1] += result.score[1];
+    totalScore[2] += result.score[2];
+    totalScore[3] += result.score[3];
   }
 
   return (
@@ -78,7 +76,7 @@ export default function PointsTable({ navigation }: any) {
       <ScrollView>
         <FlatList
           data={dummy}
-          renderItem={({ item }) => <Item score={item} />}
+          renderItem={({ item }) => <Item result={item} />}
           keyExtractor={(item) => item.round}
         />
       </ScrollView>

@@ -77,7 +77,11 @@ function MainNavigator() {
         component={Points}
         options={{ headerTitle: () => <BlankHeader /> }}
       />
-      <MainStack.Screen name="AddScoreScreen" component={AddScore} />
+      <MainStack.Screen
+        name="AddScoreScreen"
+        component={AddScore}
+        options={{ headerTitle: () => <BlankHeader /> }}
+      />
     </MainStack.Navigator>
   );
 }
