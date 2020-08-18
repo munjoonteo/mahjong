@@ -25,7 +25,25 @@ export default function Setup({ navigation }: any) {
       return;
     }
     let savedNames = [east, south, west, north];
+    let savedNamesDropdown = [
+      {
+        label: east,  
+      },
+      {
+        label: south,
+      },
+      {
+        label: west,
+      },
+      {
+        label: north,
+      },
+    ];
     try {
+      await AsyncStorage.setItem(
+        "savedNamesDropdown",
+        JSON.stringify(savedNamesDropdown)
+      );
       await AsyncStorage.setItem("savedNames", JSON.stringify(savedNames));
       navigation.navigate("PointsTableScreen");
     } catch (err) {

@@ -1,11 +1,17 @@
 import * as React from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity, AsyncStorage } from "react-native";
 
 import { Text, View } from "../components/Themed";
 
-function newGame(navigation: any) {
-  // Clear local state
-  navigation.navigate("Setup");
+async function newGame(navigation: any) {
+  try {
+    await AsyncStorage.removeItem("savedScores");
+    await AsyncStorage.removeItem("savedNames");
+    await AsyncStorage.removeItem("savedNamesDropdown");
+    navigation.navigate("Setup");
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 export default function HomeScreen({ navigation }: any) {

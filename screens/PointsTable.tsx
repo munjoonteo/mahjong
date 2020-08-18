@@ -41,23 +41,9 @@ export default function PointsTable({ navigation }: any) {
     });
   }, savedScores);
 
-  let dummy = [
-    {
-      round: "1",
-      score: [1, -1, 0, 0],
-    },
-    {
-      round: "2",
-      score: [1, -1, 0, 0],
-    },
-    {
-      round: "3",
-      score: [1, -1, 0, 0],
-    },
-  ];
-
   let totalScore = [0, 0, 0, 0];
-  for (let result of dummy) {
+  let result: any;
+  for (result of savedScores) {
     totalScore[0] += result.score[0];
     totalScore[1] += result.score[1];
     totalScore[2] += result.score[2];
@@ -75,9 +61,9 @@ export default function PointsTable({ navigation }: any) {
       </View>
       <ScrollView>
         <FlatList
-          data={dummy}
+          data={savedScores}
           renderItem={({ item }) => <Item result={item} />}
-          keyExtractor={(item) => item.round}
+          keyExtractor={(item: any) => item.round}
         />
       </ScrollView>
       <View style={styles.list}>
