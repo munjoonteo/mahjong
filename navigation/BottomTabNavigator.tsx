@@ -68,7 +68,7 @@ function MainNavigator() {
         options={{ headerTitle: "HK Mahjong Points Counter" }}
       />
       <MainStack.Screen
-        name="Setup"
+        name="SetupScreen"
         component={Setup}
         options={{ headerTitle: () => <BlankHeader /> }}
       />
