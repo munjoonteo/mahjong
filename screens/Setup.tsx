@@ -27,7 +27,7 @@ export default function Setup({ navigation }: any) {
     let savedNames = [east, south, west, north];
     let savedNamesDropdown = [
       {
-        label: east,  
+        label: east,
       },
       {
         label: south,
@@ -53,22 +53,24 @@ export default function Setup({ navigation }: any) {
 
   return (
     <View style={styles.container}>
-      <Text>Setup</Text>
       <View>
         <TextInput
           style={styles.setName}
+          placeholder={"North Seat"}
           onChangeText={(text) => setNorth(text)}
           value={north}
         />
       </View>
-      <View>
+      <View style={styles.middleRow}>
         <TextInput
           style={styles.setName}
+          placeholder={"West Seat"}
           onChangeText={(text) => setWest(text)}
           value={west}
         />
         <TextInput
           style={styles.setName}
+          placeholder={"East Seat"}
           onChangeText={(text) => setEast(text)}
           value={east}
         />
@@ -76,12 +78,14 @@ export default function Setup({ navigation }: any) {
       <View>
         <TextInput
           style={styles.setName}
+          placeholder={"South Seat"}
           onChangeText={(text) => setSouth(text)}
           value={south}
         />
       </View>
       <TouchableOpacity
         onPress={() => saveNames(navigation, east, south, west, north)}
+        style={styles.button}
       >
         <Text>Play!</Text>
       </TouchableOpacity>
@@ -95,18 +99,24 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
-  },
   setName: {
     height: 40,
     borderWidth: 1,
     borderColor: "black",
+    marginVertical: 10,
+    marginHorizontal: 5,
+    padding: 5,
+  },
+  middleRow: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  button: {
+    alignItems: "center",
+    backgroundColor: "#ccc",
+    padding: "2%",
+    margin: "10px",
+    width: "40%",
+    borderRadius: 10,
   },
 });

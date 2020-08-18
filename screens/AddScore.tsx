@@ -111,6 +111,8 @@ export default function HomeScreen({ navigation }: any) {
     },
   ];
 
+  const dropdownHeight = 100;
+
   React.useEffect(() => {
     AsyncStorage.getItem("savedNamesDropdown").then((data) => {
       if (data !== null) {
@@ -124,7 +126,8 @@ export default function HomeScreen({ navigation }: any) {
       <DropDownPicker
         placeholder="Loser"
         items={savedNames}
-        containerStyle={{ height: 40 }}
+        containerStyle={styles.dropdownContainer}
+        dropDownMaxHeight={dropdownHeight}
         onChangeItem={(item) => {
           setLoser(item);
         }}
@@ -132,7 +135,8 @@ export default function HomeScreen({ navigation }: any) {
       <DropDownPicker
         placeholder="Winner"
         items={savedNames}
-        containerStyle={{ height: 40 }}
+        containerStyle={styles.dropdownContainer}
+        dropDownMaxHeight={dropdownHeight}
         onChangeItem={(item) => {
           setWinner(item);
         }}
@@ -140,27 +144,30 @@ export default function HomeScreen({ navigation }: any) {
       <DropDownPicker
         placeholder="Faan"
         items={scores}
-        containerStyle={{ height: 40 }}
+        containerStyle={styles.dropdownContainer}
+        dropDownMaxHeight={dropdownHeight}
         onChangeItem={(item) => {
           setScore(item);
         }}
       />
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={zimo ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleZimo}
-        value={zimo}
-      />
+      <View style={styles.switchStyle}>
+        <Text style={styles.text}>Self-Draw (自摸)</Text>
+        <Switch
+          trackColor={{ false: "#767577", true: "#81b0ff" }}
+          thumbColor={zimo ? "#f5dd4b" : "#f4f3f4"}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={toggleZimo}
+          value={zimo}
+        />
+      </View>
       <TouchableOpacity
+        style={styles.button}
         onPress={() =>
           addScore(savedNames, winner, loser, score, zimo, navigation)
         }
       >
         <Text>Add Score</Text>
       </TouchableOpacity>
-
-      <Text>Hello</Text>
     </View>
   );
 }
@@ -171,13 +178,23 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
+  text: {
+    marginHorizontal: 5,
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
+  dropdownContainer: {
+    height: 40,
+    width: "60%",
+    margin: 60,
+  },
+  switchStyle: {
+    flexDirection: "row",
+  },
+  button: {
+    alignItems: "center",
+    backgroundColor: "#ccc",
+    padding: "2%",
+    margin: "10px",
+    width: "50%",
+    borderRadius: 10,
   },
 });

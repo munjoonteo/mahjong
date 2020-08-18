@@ -53,11 +53,11 @@ export default function PointsTable({ navigation }: any) {
   return (
     <View style={styles.container}>
       <View style={styles.list}>
-        <Text>Round</Text>
-        <Text>{savedNames[0]}</Text>
-        <Text>{savedNames[1]}</Text>
-        <Text>{savedNames[2]}</Text>
-        <Text>{savedNames[3]}</Text>
+        <Text style={styles.text}>Round</Text>
+        <Text style={styles.text}>{savedNames[0]}</Text>
+        <Text style={styles.text}>{savedNames[1]}</Text>
+        <Text style={styles.text}>{savedNames[2]}</Text>
+        <Text style={styles.text}>{savedNames[3]}</Text>
       </View>
       <ScrollView>
         <FlatList
@@ -67,15 +67,20 @@ export default function PointsTable({ navigation }: any) {
         />
       </ScrollView>
       <View style={styles.list}>
-        <Text>Total</Text>
-        <Text>{totalScore[0]}</Text>
-        <Text>{totalScore[1]}</Text>
-        <Text>{totalScore[2]}</Text>
-        <Text>{totalScore[3]}</Text>
+        <Text style={styles.text}>Total</Text>
+        <Text style={styles.text}>{totalScore[0]}</Text>
+        <Text style={styles.text}>{totalScore[1]}</Text>
+        <Text style={styles.text}>{totalScore[2]}</Text>
+        <Text style={styles.text}>{totalScore[3]}</Text>
       </View>
-      <TouchableOpacity onPress={() => navigation.navigate("AddScoreScreen")}>
-        <Text>Add score</Text>
-      </TouchableOpacity>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("AddScoreScreen")}
+        >
+          <Text>Add score</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -85,20 +90,24 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
   },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
+  buttonContainer: {
+    alignItems: "center",
   },
   list: {
     flexDirection: "row",
     justifyContent: "space-between",
-    borderBottomColor: "teal",
     borderBottomWidth: 1,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
+  },
+  text: {
+    fontSize: 18,
+  },
+  button: {
+    alignItems: "center",
+    backgroundColor: "#ccc",
+    padding: "2%",
+    margin: "10px",
+    width: "50%",
+    borderRadius: 10,
   },
 });

@@ -1,5 +1,10 @@
 import * as React from "react";
-import { StyleSheet, TouchableOpacity, AsyncStorage } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  AsyncStorage,
+  Image,
+} from "react-native";
 
 import { Text, View } from "../components/Themed";
 
@@ -8,7 +13,7 @@ async function newGame(navigation: any) {
     await AsyncStorage.removeItem("savedScores");
     await AsyncStorage.removeItem("savedNames");
     await AsyncStorage.removeItem("savedNamesDropdown");
-    navigation.navigate("Setup");
+    navigation.navigate("SetupScreen");
   } catch (err) {
     console.log(err);
   }
@@ -17,10 +22,14 @@ async function newGame(navigation: any) {
 export default function HomeScreen({ navigation }: any) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => newGame(navigation)}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => newGame(navigation)}
+      >
         <Text>New Game</Text>
       </TouchableOpacity>
       <TouchableOpacity
+        style={styles.button}
         onPress={() => navigation.navigate("PointsTableScreen")}
       >
         <Text>Continue Game</Text>
@@ -35,13 +44,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
+  button: {
+    alignItems: "center",
+    backgroundColor: "#ccc",
+    padding: "2%",
+    margin: "10px",
+    width: "50%",
+    borderRadius: 10,
   },
 });

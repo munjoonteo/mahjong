@@ -70,7 +70,7 @@ function MainNavigator() {
       <MainStack.Screen
         name="SetupScreen"
         component={Setup}
-        options={{ headerTitle: () => <BlankHeader /> }}
+        options={{ headerTitle: "Setup Game" }}
       />
       <MainStack.Screen
         name="PointsTableScreen"
