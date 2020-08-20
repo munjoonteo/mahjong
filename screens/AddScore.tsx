@@ -111,7 +111,7 @@ export default function HomeScreen({ navigation }: any) {
     },
   ];
 
-  const dropdownHeight = 100;
+  const dropdownHeight = 125;
 
   React.useEffect(() => {
     AsyncStorage.getItem("savedNamesDropdown").then((data) => {
@@ -119,7 +119,7 @@ export default function HomeScreen({ navigation }: any) {
         setSavedNames(JSON.parse(data));
       }
     });
-  }, savedNames);
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -145,7 +145,7 @@ export default function HomeScreen({ navigation }: any) {
         placeholder="Faan"
         items={scores}
         containerStyle={styles.dropdownContainer}
-        dropDownMaxHeight={dropdownHeight}
+        dropDownMaxHeight={dropdownHeight * 1.5}
         onChangeItem={(item) => {
           setScore(item);
         }}
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#ccc",
     padding: "2%",
-    margin: "10px",
+    margin: 10,
     width: "50%",
     borderRadius: 10,
   },

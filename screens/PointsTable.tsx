@@ -31,7 +31,7 @@ export default function PointsTable({ navigation }: any) {
         setSavedNames(JSON.parse(data));
       }
     });
-  }, savedNames);
+  }, []);
 
   React.useEffect(() => {
     AsyncStorage.getItem("savedScores").then((data) => {
@@ -39,7 +39,7 @@ export default function PointsTable({ navigation }: any) {
         setSavedScores(JSON.parse(data));
       }
     });
-  }, savedScores);
+  }, []);
 
   let totalScore = [0, 0, 0, 0];
   let result: any;
@@ -59,13 +59,11 @@ export default function PointsTable({ navigation }: any) {
         <Text style={styles.text}>{savedNames[2]}</Text>
         <Text style={styles.text}>{savedNames[3]}</Text>
       </View>
-      <ScrollView>
-        <FlatList
-          data={savedScores}
-          renderItem={({ item }) => <Item result={item} />}
-          keyExtractor={(item: any) => item.round}
-        />
-      </ScrollView>
+      <FlatList
+        data={savedScores}
+        renderItem={({ item }) => <Item result={item} />}
+        keyExtractor={(item: any) => item.round}
+      />
       <View style={styles.list}>
         <Text style={styles.text}>Total</Text>
         <Text style={styles.text}>{totalScore[0]}</Text>
@@ -106,7 +104,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#ccc",
     padding: "2%",
-    margin: "10px",
+    margin: 10,
     width: "50%",
     borderRadius: 10,
   },
