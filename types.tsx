@@ -17,4 +17,5 @@ export type MainParamList = {
 
 export type OptionsParamList = {
   OptionsScreen: undefined;
+  PointsDataScreen: undefined;
 };

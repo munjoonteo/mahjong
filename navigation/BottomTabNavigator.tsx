@@ -11,6 +11,7 @@ import Points from "../screens/PointsTable";
 import AddScore from "../screens/AddScore";
 import Options from "../screens/Options";
 import Setup from "../screens/Setup";
+import PointsData from "../screens/PointsData";
 import { BottomTabParamList, MainParamList, OptionsParamList } from "../types";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
@@ -95,6 +96,11 @@ function OptionsNavigator() {
         name="OptionsScreen"
         component={Options}
         options={{ headerTitle: "Options" }}
+      />
+      <OptionsStack.Screen
+        name="PointsDataScreen"
+        component={PointsData}
+        options={{ headerTitle: "Faan to Payouts" }}
       />
     </OptionsStack.Navigator>
   );
