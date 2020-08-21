@@ -11,11 +11,11 @@ import { Text, View } from "../components/Themed";
 function Item({ result }: any) {
   return (
     <View style={styles.list}>
-      <Text>{result.round}</Text>
-      <Text>{result.score[0]}</Text>
-      <Text>{result.score[1]}</Text>
-      <Text>{result.score[2]}</Text>
-      <Text>{result.score[3]}</Text>
+      <Text style={styles.text}>{result.round}</Text>
+      <Text style={styles.text}>{result.score[0]}</Text>
+      <Text style={styles.text}>{result.score[1]}</Text>
+      <Text style={styles.text}>{result.score[2]}</Text>
+      <Text style={styles.text}>{result.score[3]}</Text>
     </View>
   );
 }
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
   list: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-evenly",
     borderBottomWidth: 1,
     paddingHorizontal: 10,
   },
