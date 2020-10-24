@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity, AsyncStorage } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 
 import { Text, View } from "../components/Themed";
-import { Switch } from "react-native-gesture-handler";
+import { Switch, TextInput } from "react-native-gesture-handler";
 
 async function addScore(
   names: any[],
@@ -13,13 +13,9 @@ async function addScore(
   zimo: boolean,
   navigation: any
 ) {
-  if (winner === "" || winner === loser) {
-    return;
-  }
+  if (winner === "" || winner === loser) return;
 
-  if (loser === "" && zimo === false) {
-    return;
-  }
+  if (loser === "" && zimo === false) return;
 
   let savedScores = [];
   try {
@@ -29,7 +25,7 @@ async function addScore(
     }
 
     let newScore = {
-      round: String(savedScores.length),
+      round: String(savedScores.length + 1),
       score: [0, 0, 0, 0],
     };
 
@@ -59,6 +55,27 @@ async function addScore(
   }
 }
 
+async function tie(navigation: any) {
+  let savedScores = [];
+  try {
+    const data = await AsyncStorage.getItem("savedScores");
+    if (data !== null) {
+      savedScores = JSON.parse(data);
+    }
+
+    let newScore = {
+      round: String(savedScores.length + 1),
+      score: [0, 0, 0, 0],
+    };
+
+    savedScores.push(newScore);
+    await AsyncStorage.setItem("savedScores", JSON.stringify(savedScores));
+    navigation.goBack();
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 export default function HomeScreen({ navigation }: any) {
   const [loser, setLoser] = React.useState("");
   const [winner, setWinner] = React.useState("");
@@ -66,7 +83,7 @@ export default function HomeScreen({ navigation }: any) {
   const [score, setScore] = React.useState(0);
   const [savedNames, setSavedNames] = React.useState([]);
 
-  const toggleZimo = () => setZimo((previousState) => !previousState);
+  const toggleZimo = () => setZimo(previousState => !previousState);
 
   const scores: any = [
     {
@@ -114,7 +131,7 @@ export default function HomeScreen({ navigation }: any) {
   const dropdownHeight = 125;
 
   React.useEffect(() => {
-    AsyncStorage.getItem("savedNamesDropdown").then((data) => {
+    AsyncStorage.getItem("savedNamesDropdown").then(data => {
       if (data !== null) {
         setSavedNames(JSON.parse(data));
       }
@@ -128,7 +145,7 @@ export default function HomeScreen({ navigation }: any) {
         items={savedNames}
         containerStyle={styles.dropdownContainer}
         dropDownMaxHeight={dropdownHeight}
-        onChangeItem={(item) => {
+        onChangeItem={item => {
           setLoser(item);
         }}
       />
@@ -137,7 +154,7 @@ export default function HomeScreen({ navigation }: any) {
         items={savedNames}
         containerStyle={styles.dropdownContainer}
         dropDownMaxHeight={dropdownHeight}
-        onChangeItem={(item) => {
+        onChangeItem={item => {
           setWinner(item);
         }}
       />
@@ -146,10 +163,13 @@ export default function HomeScreen({ navigation }: any) {
         items={scores}
         containerStyle={styles.dropdownContainer}
         dropDownMaxHeight={dropdownHeight * 1.5}
-        onChangeItem={(item) => {
+        onChangeItem={item => {
           setScore(item);
         }}
       />
+      <TouchableOpacity style={styles.button} onPress={() => tie(navigation)}>
+        <Text>Tie</Text>
+      </TouchableOpacity>
       <View style={styles.switchStyle}>
         <Text style={styles.text}>Self-Draw (自摸)</Text>
         <Switch
