@@ -19,6 +19,20 @@ async function newGame(navigation: any) {
   }
 }
 
+async function continueGame(navigation: any) {
+  try {
+    AsyncStorage.getItem("savedNames").then(data => {
+      if (data !== null) {
+        navigation.navigate("PointsTableScreen");
+      } else {
+        return;
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 export default function HomeScreen({ navigation }: any) {
   return (
     <View style={styles.container}>
@@ -30,7 +44,7 @@ export default function HomeScreen({ navigation }: any) {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("PointsTableScreen")}
+        onPress={() => continueGame(navigation)}
       >
         <Text>Continue Game</Text>
       </TouchableOpacity>
