@@ -96,35 +96,35 @@ export default function HomeScreen({ navigation }: any) {
     },
     {
       label: "5",
-      pay: 12,
-    },
-    {
-      label: "6",
       pay: 16,
     },
     {
-      label: "7",
-      pay: 24,
-    },
-    {
-      label: "8",
+      label: "6",
       pay: 32,
     },
     {
-      label: "9",
+      label: "7",
       pay: 48,
     },
     {
-      label: "10",
+      label: "8",
       pay: 64,
     },
     {
-      label: "11",
+      label: "9",
+      pay: 96,
+    },
+    {
+      label: "10",
       pay: 128,
     },
     {
-      label: "12",
+      label: "11",
       pay: 256,
+    },
+    {
+      label: "12",
+      pay: 512,
     },
   ];
 
